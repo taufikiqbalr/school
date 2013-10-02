@@ -1,0 +1,66 @@
+header{
+    height: 150px;
+    background: linear-gradient(45deg, #020031 0%, #6D3353 100%) repeat scroll 0 0 transparent;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2) inset, 0 -3px 7px rgba(0, 0, 0, 0.2) inset;
+    color: #FFFFFF;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.075);
+}
+
+footer {
+    height: 100px;
+    margin-top: 20px;
+}
+
+.row {
+    margin-top: 12px;
+}
+
+.table thead tr{
+    background-color: #0088CC;
+    color: #FFFFFF;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.pagination-text{
+    width: 50%;
+    margin:25px 0;
+}
+
+.pagination-textlink{
+    width: 50%;
+}
+
+.search-bar{
+    background-color: #FAFAFA;
+    background-image: linear-gradient(to bottom, #FFFFFF, #F2F2F2);
+    background-repeat: repeat-x;
+    border: 1px solid #D4D4D4;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+}
+
+.content-login{
+    background: none repeat scroll 0 0 #F7F7F2;
+    border: 1px solid #E3E1CE;
+    border-radius: 6px 6px 6px 6px;
+    margin: 0 auto;
+    position: relative;
+    width: 504px;
+}
+
+.container{
+    width:1200px !important
+}
+
+.toplinks{
+    /*position: absolute;*/
+    float: right;
+    right: 20px;
+    text-align: right;
+    top: 0;
+}
+
+.controls-append{
+    margin-left: 21px
+}
+
