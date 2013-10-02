@@ -17,7 +17,7 @@
 
     <input type="submit" value="upload" />
     
-    <a href="<?php echo base_url('upload/template_siswa.xlsx') ?>">Template Siswa</a>
+    <a href="<?php echo base_url('upload/template_siswa.xls') ?>">Template Siswa</a>
 
     </form>
 <?php } ?>

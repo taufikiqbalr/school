@@ -17,7 +17,7 @@
 
     <input type="submit" value="upload" />
     
-    <a href="<?php echo base_url('upload/template_kelas.xlsx') ?>">Template Kelas</a>
+    <a href="<?php echo base_url('upload/template_kelas.xls') ?>">Template Kelas</a>
 
     </form>
 <?php } ?>

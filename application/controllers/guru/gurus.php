@@ -29,7 +29,7 @@ class gurus extends MY_application_controller {
         $file_name = $this->flexi_auth->get_user_id() + "" . +$date->getTimestamp();
 
         $config['upload_path'] = './upload/';
-        $config['allowed_types'] = 'xls|xlsx';
+        $config['allowed_types'] = 'xls';
         $config['max_size'] = '5000';
         // change file name
         $config['file_name'] = $file_name;
@@ -41,7 +41,7 @@ class gurus extends MY_application_controller {
         if (!$this->upload->do_upload("guru")) {
             $this->session->set_flashdata('message', '<div class="alert">' .
                         '<a class="close" data-dismiss="alert" href="#">&times;</a>' .
-                        'Data guru gagal di upload, format yg diterima adalah XLS atau XLSX dengan max 5MB</div>');
+                        'Data guru gagal di upload, format yg diterima adalah XLS dengan max 5MB</div>');
         } else {
             $file = array('upload_data' => $this->upload->data());
             //Set output Encoding .

@@ -17,7 +17,7 @@
 
     <input type="submit" value="upload" />
     
-    <a href="<?php echo base_url('upload/template_guru.xlsx') ?>">Template Guru</a>
+    <a href="<?php echo base_url('upload/template_guru.xls') ?>">Template Guru</a>
 
     </form>
 <?php } ?>
