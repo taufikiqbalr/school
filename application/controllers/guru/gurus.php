@@ -89,7 +89,7 @@ class gurus extends MY_application_controller {
         // set pagination custom config
         $config['base_url'] = site_url('gurus?');
         $config['total_rows'] = $this->guru_model->get_total($data['cond']);
-        $config['per_page'] = '5';
+        $config['per_page'] = '15';
         $this->pagination->initialize($config);
 
         // use when pagination use_page_number = true
