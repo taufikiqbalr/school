@@ -9,35 +9,48 @@
 </script>
 
 <?php echo $this->session->flashdata('message'); ?>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="float: right;">
+                Advance <i class="icon-filter"></i> 
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <?php if (is_privilege('NEW_GURU')) { ?>
+                    <?php echo form_open_multipart('gurus/upload'); ?>
 
-<?php if (is_privilege('NEW_GURU')) { ?>
-    <?php echo form_open_multipart('gurus/upload'); ?>
+                    <input type="file" name="guru" size="20" />
 
-    <input type="file" name="guru" size="20" />
+                    <input type="submit" value="upload" />
 
-    <input type="submit" value="upload" />
-    
-    <a href="<?php echo base_url('upload/template_guru.xls') ?>">Template Guru</a>
+                    <a href="<?php echo base_url('upload/template_guru.xls') ?>">Template Guru</a>
 
-    </form>
-<?php } ?>
+                    </form>
+                <?php } ?>
 
-<form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('gurus') ?>">
-    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
-    <label>Sort</label>
-    <select class="span1" name="order" id="guru-order">
-        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
-        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
-    </select>
-    <label>By</label>
-    <select class="span2" name="column" id="guru-column">
-        <option value="nip" <?php echo $column === "nip" ? "selected" : "" ?>>NIP</option>
-        <option value="nama" <?php echo $column === "nama" ? "selected" : "" ?>>Nama</option>
-        <option value="no_handphone" <?php echo $column === "no_handphone" ? "selected" : "" ?>>No Handphone</option>
-        <option value="jenis_kelamin" <?php echo $column === "jenis_kelamin" ? "selected" : "" ?>>Jenis Kelamin</option>
-    </select>
-    <button type="submit" class="btn">GO</button>
-</form>
+                <form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('gurus') ?>">
+                    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
+                    <label>Sort</label>
+                    <select class="span1" name="order" id="guru-order">
+                        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
+                        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
+                    </select>
+                    <label>By</label>
+                    <select class="span2" name="column" id="guru-column">
+                        <option value="nip" <?php echo $column === "nip" ? "selected" : "" ?>>NIP</option>
+                        <option value="nama" <?php echo $column === "nama" ? "selected" : "" ?>>Nama</option>
+                        <option value="no_handphone" <?php echo $column === "no_handphone" ? "selected" : "" ?>>No Handphone</option>
+                        <option value="jenis_kelamin" <?php echo $column === "jenis_kelamin" ? "selected" : "" ?>>Jenis Kelamin</option>
+                    </select>
+                    <button type="submit" class="btn">GO</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php echo form_open('gurus/deletes', 'id="tb_guru_idx_frm"') ?>
 <table class="table table-hover guru_index">

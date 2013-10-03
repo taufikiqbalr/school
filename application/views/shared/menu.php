@@ -1,5 +1,17 @@
 <div id="mainmenu" class="span3 sidebar">
     <ul class="nav nav-list">
+        <li class="">
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img class="media-object" style="height: 40px;width: 40px;"/>
+                </a>
+                <div class="media-body">
+                    <a href="<?php echo site_url('users/'.$this->session->userdata('flexi_auth')['user_id'])  ?>"><?php echo $this->session->userdata('flexi_auth')['user_identifier'] ?></a>
+                    <br/>
+                    <a href="<?php echo site_url('users/'.$this->session->userdata('flexi_auth')['user_id'].'/edit')  ?>">Edit user</a>
+                </div>
+            </div>
+        </li>
         <li class="nav-header">Main</li>
         <?php if (is_privilege('INDEX_GURU')) { ?>
             <li id="sidebar-guru" class="">

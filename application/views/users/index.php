@@ -9,22 +9,35 @@
 </script>
 
 <?php echo $this->session->flashdata('message'); ?>
-
-<form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('users') ?>">
-    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
-    <label>Sort</label>
-    <select class="span1" name="order" id="user-order">
-        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
-        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
-    </select>
-    <label>By</label>
-    <select class="span2" name="column" id="user-column">
-        <option value="uacc_username" <?php echo $column === "uacc_username" ? "selected" : "" ?>>Username</option>
-        <option value="uacc_email" <?php echo $column === "uacc_email" ? "selected" : "" ?>>Email</option>
-        <option value="ugrp_name" <?php echo $column === "ugrp_name" ? "selected" : "" ?>>Grup</option>
-        </select>
-    <button type="submit" class="btn">GO</button>
-</form>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="float: right;">
+                Advance <i class="icon-filter"></i> 
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('users') ?>">
+                    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
+                    <label>Sort</label>
+                    <select class="span1" name="order" id="user-order">
+                        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
+                        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
+                    </select>
+                    <label>By</label>
+                    <select class="span2" name="column" id="user-column">
+                        <option value="uacc_username" <?php echo $column === "uacc_username" ? "selected" : "" ?>>Username</option>
+                        <option value="uacc_email" <?php echo $column === "uacc_email" ? "selected" : "" ?>>Email</option>
+                        <option value="ugrp_name" <?php echo $column === "ugrp_name" ? "selected" : "" ?>>Grup</option>
+                    </select>
+                    <button type="submit" class="btn">GO</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php echo form_open('users/deletes', 'id="tb_user_idx_frm"') ?>
 <table class="table table-hover user_index">
@@ -44,9 +57,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         <?php if (is_privilege('DELETE_USER', $this->session->userdata('privileges'))) { ?>
-                        <li>
-                            <a href="#modal_user_deletes" data-toggle="modal">Hapus</a>
-                        </li>
+                            <li>
+                                <a href="#modal_user_deletes" data-toggle="modal">Hapus</a>
+                            </li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -72,13 +85,13 @@
                     <td>
                         <p>
                             <?php if (is_privilege('SHOW_USER', $this->session->userdata('privileges'))) { ?>
-                            <a href="<?php echo site_url('users/' . $user['uacc_id']) ?>" class="btn btn-mini">Lihat</a>
+                                <a href="<?php echo site_url('users/' . $user['uacc_id']) ?>" class="btn btn-mini">Lihat</a>
                             <?php } ?>
                             <?php if (is_privilege('EDIT_USER', $this->session->userdata('privileges'))) { ?>
-                            <a href="<?php echo site_url('users/' . $user['uacc_id'] . '/edit') ?>" class="btn btn-mini btn-warning">Ubah</a>
+                                <a href="<?php echo site_url('users/' . $user['uacc_id'] . '/edit') ?>" class="btn btn-mini btn-warning">Ubah</a>
                             <?php } ?>
                             <?php if (is_privilege('DELETE_USER', $this->session->userdata('privileges'))) { ?>
-                            <a href="#modal_user_delete<?php echo $user['uacc_id'] ?>" class="btn btn-mini btn-danger" data-toggle="modal">Hapus</a>
+                                <a href="#modal_user_delete<?php echo $user['uacc_id'] ?>" class="btn btn-mini btn-danger" data-toggle="modal">Hapus</a>
                             <?php } ?>
                         </p>
                         <div id="modal_user_delete<?php echo $user['uacc_id'] ?>" class="modal hide fade">
@@ -110,11 +123,11 @@
 <div id="pagination-user" class="pagination-textlink pull-left"><?php echo $links; ?></div>
 <div class="clearfix"></div>
 <?php if (is_privilege('NEW_USER', $this->session->userdata('privileges'))) { ?>
-<div class="pull-right">
-    <p>
-        <a href="<?php echo site_url('users/new') ?>" class="btn btn-primary">Tambah</a>
-    </p>
-</div>
+    <div class="pull-right">
+        <p>
+            <a href="<?php echo site_url('users/new') ?>" class="btn btn-primary">Tambah</a>
+        </p>
+    </div>
 <?php } ?>
 <div class="clearfix"></div>
 <div id="modal_user_deletes" class="modal hide fade">

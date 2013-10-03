@@ -9,21 +9,34 @@
 </script>
 
 <?php echo $this->session->flashdata('message'); ?>
-
-<form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('privileges') ?>">
-    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
-    <label>Sort</label>
-    <select class="span1" name="order" id="privilege-order">
-        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
-        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
-    </select>
-    <label>By</label>
-    <select class="span2" name="column" id="privilege-column">
-        <option value="upriv_name" <?php echo $column === "upriv_name" ? "selected" : "" ?>>Nama Hak Akses</option>
-        <option value="upriv_desc" <?php echo $column === "upriv_desc" ? "selected" : "" ?>>Deskripsi Hak Akses</option>
-    </select>
-    <button type="submit" class="btn">GO</button>
-</form>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="float: right;">
+                Advance <i class="icon-filter"></i> 
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('privileges') ?>">
+                    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
+                    <label>Sort</label>
+                    <select class="span1" name="order" id="privilege-order">
+                        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
+                        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
+                    </select>
+                    <label>By</label>
+                    <select class="span2" name="column" id="privilege-column">
+                        <option value="upriv_name" <?php echo $column === "upriv_name" ? "selected" : "" ?>>Nama Hak Akses</option>
+                        <option value="upriv_desc" <?php echo $column === "upriv_desc" ? "selected" : "" ?>>Deskripsi Hak Akses</option>
+                    </select>
+                    <button type="submit" class="btn">GO</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php echo form_open('privileges/deletes', 'id="tb_privilege_idx_frm"') ?>
 <table class="table table-hover privilege_index">

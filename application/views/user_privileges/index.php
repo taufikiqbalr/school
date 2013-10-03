@@ -9,21 +9,34 @@
 </script>
 
 <?php echo $this->session->flashdata('message'); ?>
-
-<form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('userprivileges') ?>">
-    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
-    <label>Sort</label>
-    <select class="span1" name="order" id="user_privilege-order">
-        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
-        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
-    </select>
-    <label>By</label>
-    <select class="span2" name="column" id="user_privilege-column">
-        <option value="username" <?php echo $column === "username" ? "selected" : "" ?>>Nama User</option>
-        <option value="upriv_name" <?php echo $column === "upriv_name" ? "selected" : "" ?>>Nama Hak Akses</option>
-    </select>
-    <button type="submit" class="btn">GO</button>
-</form>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="float: right;">
+                Advance <i class="icon-filter"></i> 
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('userprivileges') ?>">
+                    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
+                    <label>Sort</label>
+                    <select class="span1" name="order" id="user_privilege-order">
+                        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
+                        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
+                    </select>
+                    <label>By</label>
+                    <select class="span2" name="column" id="user_privilege-column">
+                        <option value="username" <?php echo $column === "username" ? "selected" : "" ?>>Nama User</option>
+                        <option value="upriv_name" <?php echo $column === "upriv_name" ? "selected" : "" ?>>Nama Hak Akses</option>
+                    </select>
+                    <button type="submit" class="btn">GO</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php echo form_open('userprivileges/deletes', 'id="tb_user_privilege_idx_frm"') ?>
 <table class="table table-hover user_privilege_index">
@@ -42,9 +55,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         <?php if (is_privilege('DELETE_HAK_AKSES_GRUP')) { ?>
-                        <li>
-                            <a href="#modal_user_privilege_deletes" data-toggle="modal">Hapus</a>
-                        </li>
+                            <li>
+                                <a href="#modal_user_privilege_deletes" data-toggle="modal">Hapus</a>
+                            </li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -67,13 +80,13 @@
                     <td>
                         <p>
                             <?php if (is_privilege('SHOW_HAK_AKSES_GRUP')) { ?>
-                            <a href="<?php echo site_url('userprivileges/' . $user_privilege['id']) ?>" class="btn btn-mini">Lihat</a>
+                                <a href="<?php echo site_url('userprivileges/' . $user_privilege['id']) ?>" class="btn btn-mini">Lihat</a>
                             <?php } ?>
                             <?php if (is_privilege('EDIT_HAK_AKSES_GRUP')) { ?>
-                            <a href="<?php echo site_url('userprivileges/' . $user_privilege['id'] . '/edit') ?>" class="btn btn-mini btn-warning">Ubah</a>
+                                <a href="<?php echo site_url('userprivileges/' . $user_privilege['id'] . '/edit') ?>" class="btn btn-mini btn-warning">Ubah</a>
                             <?php } ?>
                             <?php if (is_privilege('DELETE_HAK_AKSES_GRUP')) { ?>
-                            <a href="#modal_user_privilege_delete<?php echo $user_privilege['id'] ?>" class="btn btn-mini btn-danger" data-toggle="modal">Hapus</a>
+                                <a href="#modal_user_privilege_delete<?php echo $user_privilege['id'] ?>" class="btn btn-mini btn-danger" data-toggle="modal">Hapus</a>
                             <?php } ?>
                         </p>
                         <div id="modal_user_privilege_delete<?php echo $user_privilege['id'] ?>" class="modal hide fade">
@@ -105,11 +118,11 @@
 <div id="pagination-user_privilege" class="pagination-textlink pull-left"><?php echo $links; ?></div>
 <div class="clearfix"></div>
 <?php if (is_privilege('NEW_HAK_AKSES_GRUP')) { ?>
-<div class="pull-right">
-    <p>
-        <a href="<?php echo site_url('userprivileges/new') ?>" class="btn btn-primary">Tambah</a>
-    </p>
-</div>
+    <div class="pull-right">
+        <p>
+            <a href="<?php echo site_url('userprivileges/new') ?>" class="btn btn-primary">Tambah</a>
+        </p>
+    </div>
 <?php } ?>
 <div class="clearfix"></div>
 <div id="modal_user_privilege_deletes" class="modal hide fade">

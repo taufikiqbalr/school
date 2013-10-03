@@ -9,35 +9,48 @@
 </script>
 
 <?php echo $this->session->flashdata('message'); ?>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="float: right;">
+                Advance <i class="icon-filter"></i> 
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <?php if (is_privilege('NEW_SISWA')) { ?>
+                    <?php echo form_open_multipart('siswas/upload'); ?>
 
-<?php if (is_privilege('NEW_SISWA')) { ?>
-    <?php echo form_open_multipart('siswas/upload'); ?>
+                    <input type="file" name="siswa" size="20" />
 
-    <input type="file" name="siswa" size="20" />
+                    <input type="submit" value="upload" />
 
-    <input type="submit" value="upload" />
-    
-    <a href="<?php echo base_url('upload/template_siswa.xls') ?>">Template Siswa</a>
+                    <a href="<?php echo base_url('upload/template_siswa.xls') ?>">Template Siswa</a>
 
-    </form>
-<?php } ?>
+                    </form>
+                <?php } ?>
 
-<form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('siswas') ?>">
-    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
-    <label>Sort</label>
-    <select class="span1" name="order" id="siswa-order">
-        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
-        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
-    </select>
-    <label>By</label>
-    <select class="span2" name="column" id="siswa-column">
-        <option value="nis" <?php echo $column === "nis" ? "selected" : "" ?>>NIS</option>
-        <option value="nama" <?php echo $column === "nama" ? "selected" : "" ?>>Nama</option>
-        <option value="nohp" <?php echo $column === "nohp" ? "selected" : "" ?>>No Handphone</option>
-        <option value="jk" <?php echo $column === "jk" ? "selected" : "" ?>>Jenis Kelamin</option>
-    </select>
-    <button type="submit" class="btn">GO</button>
-</form>
+                <form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('siswas') ?>">
+                    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
+                    <label>Sort</label>
+                    <select class="span1" name="order" id="siswa-order">
+                        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
+                        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
+                    </select>
+                    <label>By</label>
+                    <select class="span2" name="column" id="siswa-column">
+                        <option value="nis" <?php echo $column === "nis" ? "selected" : "" ?>>NIS</option>
+                        <option value="nama" <?php echo $column === "nama" ? "selected" : "" ?>>Nama</option>
+                        <option value="nohp" <?php echo $column === "nohp" ? "selected" : "" ?>>No Handphone</option>
+                        <option value="jk" <?php echo $column === "jk" ? "selected" : "" ?>>Jenis Kelamin</option>
+                    </select>
+                    <button type="submit" class="btn">GO</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php echo form_open('siswas/deletes', 'id="tb_siswa_idx_frm"') ?>
 <table class="table table-hover siswa_index">

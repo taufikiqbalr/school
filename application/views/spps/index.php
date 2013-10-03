@@ -9,23 +9,36 @@
 </script>
 
 <?php echo $this->session->flashdata('message'); ?>
-
-<form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('spps') ?>">
-    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
-    <label>Sort</label>
-    <select class="span1" name="order" id="spp-order">
-        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
-        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
-    </select>
-    <label>By</label>
-    <select class="span2" name="column" id="spp-column">
-        <option value="nis" <?php echo $column === "nis" ? "selected" : "" ?>>NIS</option>
-        <option value="nama" <?php echo $column === "nama" ? "selected" : "" ?>>Nama</option>
-        <option value="bulan_tempo" <?php echo $column === "bulan_tempo" ? "selected" : "" ?>>Bulan</option>
-        <option value="tahun_tempo" <?php echo $column === "tahun_tempo" ? "selected" : "" ?>>Tahun</option>
-    </select>
-    <button type="submit" class="btn">GO</button>
-</form>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="float: right;">
+                Advance <i class="icon-filter"></i> 
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('spps') ?>">
+                    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
+                    <label>Sort</label>
+                    <select class="span1" name="order" id="spp-order">
+                        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
+                        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
+                    </select>
+                    <label>By</label>
+                    <select class="span2" name="column" id="spp-column">
+                        <option value="nis" <?php echo $column === "nis" ? "selected" : "" ?>>NIS</option>
+                        <option value="nama" <?php echo $column === "nama" ? "selected" : "" ?>>Nama</option>
+                        <option value="bulan_tempo" <?php echo $column === "bulan_tempo" ? "selected" : "" ?>>Bulan</option>
+                        <option value="tahun_tempo" <?php echo $column === "tahun_tempo" ? "selected" : "" ?>>Tahun</option>
+                    </select>
+                    <button type="submit" class="btn">GO</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php echo form_open('spps/deletes', 'id="tb_spp_idx_frm"') ?>
 <table class="table table-hover spp_index">
@@ -92,7 +105,7 @@
                                 <h3>Hapus Data SPP</h3>
                             </div>
                             <div class="modal-body">
-                                <p>Apakah anda yakin menghapus data spp <?php echo $spp['nis'].' '.get_month($spp['bulan_tempo']).' '.$spp['tahun_tempo'] ?>?</p>
+                                <p>Apakah anda yakin menghapus data spp <?php echo $spp['nis'] . ' ' . get_month($spp['bulan_tempo']) . ' ' . $spp['tahun_tempo'] ?>?</p>
                             </div>
                             <div class="modal-footer">
                                 <a href="#" class="btn" data-dismiss="modal">Batal</a>

@@ -1,8 +1,14 @@
 <body class="">
     <header id="overview" class="subhead">
         <div class="container">
-            <h1>Sekolah</h1>
-            <p class="lead">....</p>
+            <div class="row">
+                <div class="span10" style="margin: 10px">
+                    <b>Sistem Akademik</b>
+                </div>
+                <div class="span5">
+                    <img class="" style="height: 45px; width: 45px; float: right;"/>
+                </div>
+            </div>
         </div>
     </header>
     <div class="clearfix"></div>

@@ -9,67 +9,80 @@
 </script>
 
 <?php echo $this->session->flashdata('message'); ?>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="float: right;">
+                Advance <i class="icon-filter"></i> 
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <?php if (is_privilege('NEW_ABSENSI')) { ?>
+                    <?php echo form_open_multipart('absensis/upload'); ?>
 
-<?php if (is_privilege('NEW_ABSENSI')) { ?>
-    <?php echo form_open_multipart('absensis/upload'); ?>
+                    <input type="file" name="absensi" size="20" />
 
-    <input type="file" name="absensi" size="20" />
-    
-    <input type="submit" value="upload" />
-    
-    <a href="<?php echo base_url('upload/template_absensi.xls') ?>">Template Absensi</a>
+                    <input type="submit" value="upload" />
 
-    </form>
-<?php } ?>
-<!--<a href="<?php echo base_url('absensis/download') ?>">Download Absensi</a>-->
-    
-<form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('absensis') ?>">
-    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
-    <label>Kelas</label>
-    <select class="span1" name="kelas">
-        <option value=""> </option>
-        <?php if (!empty($kelas_bagians)) { ?>
-            <?php foreach ($kelas_bagians as $kelas_bagian): ?>
-                <option value="<?php echo $kelas_bagian['id'] ?>" <?php echo $kelas_bagian_id === $kelas_bagian['id'] ? "selected" : "" ?>><?php echo get_full_kelas($kelas_bagian['id']) ?></option>
-            <?php endforeach; ?>
-        <?php } ?>
-    </select>
-    <label>Tanggal</label>
-    <select class="span1" name="tanggal">
-        <option value=""> </option>
-        <?php for ($i = 1; $i <= 31; $i++) { ?>
-            <option value="<?php echo $i ?>" <?php echo $tanggal === $i ? "selected" : "" ?>><?php echo $i ?></option>
-        <?php } ?>
-    </select>
-    <label>Bulan</label>
-    <select class="span1" name="bulan">
-        <option value=""> </option>
-        <?php foreach (months() as $key => $month) : ?>
-            <option value="<?php echo $key + 1 ?>" <?php echo ($key + 1) === ((int) $bulan) ? "selected" : "" ?>><?php echo $month ?></option>
-        <?php endforeach; ?>
-    </select>
-    <label>Tahun</label>
-    <select class="span1" name="tahun_ajaran_id">
-        <option value=""> </option>
-        <?php if (!empty($tahun_ajarans)) { ?>
-            <?php foreach ($tahun_ajarans as $tahun_ajaran): ?>
-                <option value="<?php echo $tahun_ajaran['id'] ?>" <?php echo $tahun_ajaran_id === $tahun_ajaran['id'] ? "selected" : "" ?>><?php echo $tahun_ajaran['nama'] ?></option>
-            <?php endforeach; ?>
-        <?php } ?>
-    </select>
-    <label>Sort</label>
-    <select class="span1" name="order" id="absensi-order">
-        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
-        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
-    </select>
-    <label>By</label>
-    <select class="span2" name="column" id="absensi-column">
-        <option value="tanggal" <?php echo $column === "tanggal" ? "selected" : "" ?>>Tanggal</option>
-        <option value="nis" <?php echo $column === "nis" ? "selected" : "" ?>>NIS</option>
-        <option value="tingkat" <?php echo $column === "tingkat" ? "selected" : "" ?>>Kelas</option>
-    </select>
-    <button type="submit" class="btn">GO</button>
-</form>
+                    <a href="<?php echo base_url('upload/template_absensi.xls') ?>">Template Absensi</a>
+
+                    </form>
+                <?php } ?>
+            <!--<a href="<?php echo base_url('absensis/download') ?>">Download Absensi</a>-->
+
+                <form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('absensis') ?>">
+                    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
+                    <label>Kelas</label>
+                    <select class="span1" name="kelas">
+                        <option value=""> </option>
+                        <?php if (!empty($kelas_bagians)) { ?>
+                            <?php foreach ($kelas_bagians as $kelas_bagian): ?>
+                                <option value="<?php echo $kelas_bagian['id'] ?>" <?php echo $kelas_bagian_id === $kelas_bagian['id'] ? "selected" : "" ?>><?php echo get_full_kelas($kelas_bagian['id']) ?></option>
+                            <?php endforeach; ?>
+                        <?php } ?>
+                    </select>
+                    <label>Tanggal</label>
+                    <select class="span1" name="tanggal">
+                        <option value=""> </option>
+                        <?php for ($i = 1; $i <= 31; $i++) { ?>
+                            <option value="<?php echo $i ?>" <?php echo $tanggal === $i ? "selected" : "" ?>><?php echo $i ?></option>
+                        <?php } ?>
+                    </select>
+                    <label>Bulan</label>
+                    <select class="span1" name="bulan">
+                        <option value=""> </option>
+                        <?php foreach (months() as $key => $month) : ?>
+                            <option value="<?php echo $key + 1 ?>" <?php echo ($key + 1) === ((int) $bulan) ? "selected" : "" ?>><?php echo $month ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <label>Tahun</label>
+                    <select class="span1" name="tahun_ajaran_id">
+                        <option value=""> </option>
+                        <?php if (!empty($tahun_ajarans)) { ?>
+                            <?php foreach ($tahun_ajarans as $tahun_ajaran): ?>
+                                <option value="<?php echo $tahun_ajaran['id'] ?>" <?php echo $tahun_ajaran_id === $tahun_ajaran['id'] ? "selected" : "" ?>><?php echo $tahun_ajaran['nama'] ?></option>
+                            <?php endforeach; ?>
+                        <?php } ?>
+                    </select>
+                    <label>Sort</label>
+                    <select class="span1" name="order" id="absensi-order">
+                        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
+                        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
+                    </select>
+                    <label>By</label>
+                    <select class="span2" name="column" id="absensi-column">
+                        <option value="tanggal" <?php echo $column === "tanggal" ? "selected" : "" ?>>Tanggal</option>
+                        <option value="nis" <?php echo $column === "nis" ? "selected" : "" ?>>NIS</option>
+                        <option value="tingkat" <?php echo $column === "tingkat" ? "selected" : "" ?>>Kelas</option>
+                    </select>
+                    <button type="submit" class="btn">GO</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php echo form_open('absensis/deletes', 'id="tb_absensi_idx_frm"') ?>
 <table class="table table-hover absensi_index">

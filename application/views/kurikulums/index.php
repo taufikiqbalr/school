@@ -9,20 +9,33 @@
 </script>
 
 <?php echo $this->session->flashdata('message'); ?>
-
-<form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('kurikulums') ?>">
-    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
-    <label>Sort</label>
-    <select class="span1" name="order" id="kurikulum-order">
-        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
-        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
-    </select>
-    <label>By</label>
-    <select class="span2" name="column" id="kurikulum-column">
-        <option value="nama" <?php echo $column === "nama" ? "selected" : "" ?>>Nama</option>
-        </select>
-    <button type="submit" class="btn">GO</button>
-</form>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="float: right;">
+                Advance <i class="icon-filter"></i> 
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('kurikulums') ?>">
+                    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
+                    <label>Sort</label>
+                    <select class="span1" name="order" id="kurikulum-order">
+                        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
+                        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
+                    </select>
+                    <label>By</label>
+                    <select class="span2" name="column" id="kurikulum-column">
+                        <option value="nama" <?php echo $column === "nama" ? "selected" : "" ?>>Nama</option>
+                    </select>
+                    <button type="submit" class="btn">GO</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php echo form_open('kurikulums/deletes', 'id="tb_kurikulum_idx_frm"') ?>
 <table class="table table-hover kurikulum_index">
@@ -40,9 +53,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         <?php if (is_privilege('DELETE_KURIKULUM', $this->session->userdata('privileges'))) { ?>
-                        <li>
-                            <a href="#modal_kurikulum_deletes" data-toggle="modal">Hapus</a>
-                        </li>
+                            <li>
+                                <a href="#modal_kurikulum_deletes" data-toggle="modal">Hapus</a>
+                            </li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -62,13 +75,13 @@
                     <td>
                         <p>
                             <?php if (is_privilege('SHOW_KURIKULUM', $this->session->userdata('privileges'))) { ?>
-                            <a href="<?php echo site_url('kurikulums/' . $kurikulum['id']) ?>" class="btn btn-mini">Lihat</a>
+                                <a href="<?php echo site_url('kurikulums/' . $kurikulum['id']) ?>" class="btn btn-mini">Lihat</a>
                             <?php } ?>
                             <?php if (is_privilege('EDIT_KURIKULUM', $this->session->userdata('privileges'))) { ?>
-                            <a href="<?php echo site_url('kurikulums/' . $kurikulum['id'] . '/edit') ?>" class="btn btn-mini btn-warning">Ubah</a>
+                                <a href="<?php echo site_url('kurikulums/' . $kurikulum['id'] . '/edit') ?>" class="btn btn-mini btn-warning">Ubah</a>
                             <?php } ?>
                             <?php if (is_privilege('DELETE_KURIKULUM', $this->session->userdata('privileges'))) { ?>
-                            <a href="#modal_kurikulum_delete<?php echo $kurikulum['id'] ?>" class="btn btn-mini btn-danger" data-toggle="modal">Hapus</a>
+                                <a href="#modal_kurikulum_delete<?php echo $kurikulum['id'] ?>" class="btn btn-mini btn-danger" data-toggle="modal">Hapus</a>
                             <?php } ?>
                         </p>
                         <div id="modal_kurikulum_delete<?php echo $kurikulum['id'] ?>" class="modal hide fade">
@@ -100,11 +113,11 @@
 <div id="pagination-kurikulum" class="pagination-textlink pull-left"><?php echo $links; ?></div>
 <div class="clearfix"></div>
 <?php if (is_privilege('NEW_KURIKULUM', $this->session->userdata('privileges'))) { ?>
-<div class="pull-right">
-    <p>
-        <a href="<?php echo site_url('kurikulums/new') ?>" class="btn btn-primary">Tambah</a>
-    </p>
-</div>
+    <div class="pull-right">
+        <p>
+            <a href="<?php echo site_url('kurikulums/new') ?>" class="btn btn-primary">Tambah</a>
+        </p>
+    </div>
 <?php } ?>
 <div class="clearfix"></div>
 <div id="modal_kurikulum_deletes" class="modal hide fade">

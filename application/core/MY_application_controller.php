@@ -68,7 +68,7 @@ class MY_application_controller extends MY_load_controller {
         $this->load->view('shared/head', $data);
         $this->load->view('shared/scripts', $data);
         $this->load->view('shared/header', $data);
-        $this->load->view('shared/user_menu', $data);
+//        $this->load->view('shared/user_menu', $data);
         $this->load->view('shared/menu', $data);
         $this->load->view('shared/breadcrumb', $data);
         $this->load->view('shared/content_title', $data);

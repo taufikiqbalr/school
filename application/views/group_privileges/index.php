@@ -9,7 +9,21 @@
 </script>
 
 <?php echo $this->session->flashdata('message'); ?>
-
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="float: right;">
+                Advance <i class="icon-filter"></i> 
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                
+            </div>
+        </div>
+    </div>
+</div>
 <form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('groupprivileges') ?>">
     <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
     <label>Sort</label>

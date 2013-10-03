@@ -9,28 +9,41 @@
 </script>
 
 <?php echo $this->session->flashdata('message'); ?>
-
-<form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('siswanilais') ?>">
-    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
-    <label>Sort</label>
-    <select class="span1" name="order" id="siswa_nilai-order">
-        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
-        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
-    </select>
-    <label>By</label>
-    <select class="span2" name="column" id="siswa_nilai-column">
-        <option value="nip" <?php echo $column === "nip" ? "selected" : "" ?>>Guru</option>
-        <option value="nis" <?php echo $column === "nis" ? "selected" : "" ?>>Siswa</option>
-        <option value="kode" <?php echo $column === "kode" ? "selected" : "" ?>>Mata Pelajaran</option>
-        <option value="tingkat" <?php echo $column === "tingkat" ? "selected" : "" ?>>Kelas</option>
-        <option value="nama_tahun_ajaran" <?php echo $column === "nama_tahun_ajaran" ? "selected" : "" ?>>Tahun Ajaran</option>
-        <option value="semester" <?php echo $column === "semester" ? "selected" : "" ?>>Semester</option>
-        <option value="jenis" <?php echo $column === "jenis" ? "selected" : "" ?>>Jenis</option>
-        <option value="nama" <?php echo $column === "nama" ? "selected" : "" ?>>Yg Ke</option>
-        <option value="nilai" <?php echo $column === "nilai" ? "selected" : "" ?>>Nilai</option>
-    </select>
-    <button type="submit" class="btn">GO</button>
-</form>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="float: right;">
+                Advance <i class="icon-filter"></i> 
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+                <form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('siswanilais') ?>">
+                    <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>
+                    <label>Sort</label>
+                    <select class="span1" name="order" id="siswa_nilai-order">
+                        <option value="asc" <?php echo $order === "asc" ? "selected" : "" ?>>Asc</option>
+                        <option value="desc" <?php echo $order === "desc" ? "selected" : "" ?>>Desc</option>
+                    </select>
+                    <label>By</label>
+                    <select class="span2" name="column" id="siswa_nilai-column">
+                        <option value="nip" <?php echo $column === "nip" ? "selected" : "" ?>>Guru</option>
+                        <option value="nis" <?php echo $column === "nis" ? "selected" : "" ?>>Siswa</option>
+                        <option value="kode" <?php echo $column === "kode" ? "selected" : "" ?>>Mata Pelajaran</option>
+                        <option value="tingkat" <?php echo $column === "tingkat" ? "selected" : "" ?>>Kelas</option>
+                        <option value="nama_tahun_ajaran" <?php echo $column === "nama_tahun_ajaran" ? "selected" : "" ?>>Tahun Ajaran</option>
+                        <option value="semester" <?php echo $column === "semester" ? "selected" : "" ?>>Semester</option>
+                        <option value="jenis" <?php echo $column === "jenis" ? "selected" : "" ?>>Jenis</option>
+                        <option value="nama" <?php echo $column === "nama" ? "selected" : "" ?>>Yg Ke</option>
+                        <option value="nilai" <?php echo $column === "nilai" ? "selected" : "" ?>>Nilai</option>
+                    </select>
+                    <button type="submit" class="btn">GO</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php echo form_open('siswa_nilais/deletes', 'id="tb_siswa_nilai_idx_frm"') ?>
 <table class="table table-hover siswa_nilai_index">
