@@ -6,7 +6,7 @@
                     <b>Sistem Akademik</b>
                 </div>
                 <div class="span5">
-                    <img class="" style="height: 45px; width: 45px; float: right;"/>
+                    <!--<a title="" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-placement="bottom" data-toggle="popover" class="btn" href="#" data-original-title="Popover on bottom">Popover on bottom</a><img class="" style="height: 45px; width: 45px; float: right;"/>-->
                 </div>
             </div>
         </div>

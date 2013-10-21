@@ -17,7 +17,7 @@
             </a>
             <div class="clearfix"></div>
         </div>
-        <div id="collapseOne" class="accordion-body collapse in">
+        <div id="collapseOne" class="accordion-body collapse out">
             <div class="accordion-inner">
                 <form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('siswanilais') ?>">
                     <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>

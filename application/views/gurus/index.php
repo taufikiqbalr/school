@@ -17,7 +17,7 @@
             </a>
             <div class="clearfix"></div>
         </div>
-        <div id="collapseOne" class="accordion-body collapse in">
+        <div id="collapseOne" class="accordion-body collapse out">
             <div class="accordion-inner">
                 <?php if (is_privilege('NEW_GURU')) { ?>
                     <?php echo form_open_multipart('gurus/upload'); ?>
