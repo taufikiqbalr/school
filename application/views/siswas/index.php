@@ -101,6 +101,11 @@
                     </td>
                     <td>
                         <p>
+                            <?php if (is_privilege('NEW_SISWA')) { ?>
+                                <?php if (!empty($siswa['user_id'])){ ?>
+                                    <a href="<?php echo base_url();?>cam/shot.php?act=g&id=<?php echo $siswa['user_id'];?>" target="_blank" class="btn btn-mini btn-success">Foto</a>
+                                <?php } ?>
+                            <?php } ?>
                             <?php if (is_privilege('SHOW_SISWA', $this->session->userdata('privileges'))) { ?>
                                 <a href="<?php echo site_url('siswas/' . $siswa['id']) ?>" class="btn btn-mini">Lihat</a>
                             <?php } ?>

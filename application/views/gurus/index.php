@@ -101,6 +101,11 @@
                     </td>
                     <td>
                         <p>
+                            <?php if (is_privilege('NEW_GURU')) { ?>
+                                <?php if (!empty($guru['user_id'])){ ?>
+                                    <a href="<?php echo base_url();?>cam/shot.php?act=g&id=<?php echo $guru['user_id'];?>" target="_blank" class="btn btn-mini btn-success">Foto</a>
+                                <?php } ?>
+                            <?php } ?>
                             <?php if (is_privilege('SHOW_GURU')) { ?>
                                 <a href="<?php echo site_url('gurus/' . $guru['id']) ?>" class="btn btn-mini">Lihat</a>
                             <?php } ?>
