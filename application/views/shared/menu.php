@@ -3,7 +3,7 @@
         <li class="">
             <div class="dropdown">
                 <a class="pull-left dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-                    <img class="media-object" style="height: 40px;width: 40px;"/>
+                    <img class="media-object" style="height: 40px;width: 40px;" src="<?php echo base_url('foto/'.$this->session->userdata('flexi_auth')['user_id'].'.jpg'); ?>" alt="N/A" />
                 </a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 <!-- 					<li><a tabindex="-1" href="#">Change Picture</a></li> -->
