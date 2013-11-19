@@ -1,10 +1,15 @@
 <div id="mainmenu" class="span3 sidebar">
     <ul class="nav nav-list">
         <li class="">
-            <div class="media">
-                <a class="pull-left" href="#">
+            <div class="dropdown">
+                <a class="pull-left dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
                     <img class="media-object" style="height: 40px;width: 40px;"/>
                 </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+<!-- 					<li><a tabindex="-1" href="#">Change Picture</a></li> -->
+<!-- 					<li class="divider"></li> -->
+					<li><a tabindex="-1" href="<?php echo site_url('logout') ?>">Log Out</a></li>
+				</ul>
                 <div class="media-body">
                     <a href="<?php echo site_url('users/'.$this->session->userdata('flexi_auth')['user_id'])  ?>"><?php echo $this->session->userdata('flexi_auth')['user_identifier'] ?></a>
                     <br/>
