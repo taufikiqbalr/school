@@ -15,20 +15,36 @@
         <input type="text" name="uacc_email" placeholder="Email..." value="<?php echo $user['uacc_email'] ?>">
     </div>
 </div>
-<div class="control-group <?php if (($this->session->flashdata('uacc_group_fk'))) echo 'error'; ?>">
-    <label class="control-label" for="uacc_group_fk">Grup</label>
-    <div class="controls">
-        <select class="span2" name="uacc_group_fk">
-            <?php if (!empty($user_groups)) { ?>
-                <?php foreach ($user_groups as $user_group): ?>
-                    <option value="<?php echo $user_group['ugrp_id'] ?>" <?php echo $user['uacc_group_fk'] === $user_group['ugrp_id'] ? "selected" : "" ?>><?php echo $user_group['ugrp_name'] ?></option>
-                <?php endforeach; ?>
-            <?php }else { ?>
-                <option value=""> </option>
-            <?php } ?>
-        </select>
-    </div>
-</div>
+<!-- only admin can edit, privilege name not exist -->
+<?php if (is_privilege('EDIT_GROUP_USER_DATA')) { ?>
+	<div class="control-group <?php if (($this->session->flashdata('uacc_group_fk'))) echo 'error'; ?>">
+	    <label class="control-label" for="uacc_group_fk">Grup</label>
+	    <div class="controls">
+	        <select class="span2" name="uacc_group_fk">
+	            <?php if (!empty($user_groups)) { ?>
+	                <?php foreach ($user_groups as $user_group): ?>
+	                    <option value="<?php echo $user_group['ugrp_id'] ?>" <?php echo $user['uacc_group_fk'] === $user_group['ugrp_id'] ? "selected" : "" ?>><?php echo $user_group['ugrp_name'] ?></option>
+	                <?php endforeach; ?>
+	            <?php }else { ?>
+	                <option value=""> </option>
+	            <?php } ?>
+	        </select>
+	    </div>
+	</div>
+<?php }else { ?>
+	<div class="control-group">
+	    <label class="control-label" for="uacc_group_fk">Grup</label>
+	    <div class="controls">
+	        <label for="uacc_group_fk">
+	            <?php if (!empty($user_groups)) { ?>
+	                <?php foreach ($user_groups as $user_group): ?>
+	                    <?php echo $user['uacc_group_fk'] === $user_group['ugrp_id'] ? $user_group['ugrp_name'] : "" ?>
+	                <?php endforeach; ?>
+	            <?php } ?>
+	        </label>
+	    </div>
+	</div>
+<?php } ?>
 <div class=" form-actions">
     <button type="submit" name="submit" class="btn btn-success button-save" data-loading-text="Menyimpan...">Simpan</button>
     <a href="<?php echo site_url('users/' . $user['uacc_id']) ?>" class="btn">Kembali</a>
