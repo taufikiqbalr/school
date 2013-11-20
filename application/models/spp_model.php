@@ -77,7 +77,12 @@ class spp_model extends CI_Model {
             else
                 $data['lunas'] = "0";
             
-            return $this->db->insert('spps', $data);
+            $status = $this->db->insert('spps', $data);
+            
+            // save log data
+            $this->save_log($data,$this->db->insert_id(),"CREATE");
+            
+            return $status;
         } else {
             return FALSE;
         }
@@ -92,6 +97,9 @@ class spp_model extends CI_Model {
             else
                 $data['lunas'] = "0";
             
+            // save log data
+            $this->save_log($data,$id,"UPDATE");
+            
             $this->db->where('id', $id);
             $this->db->update('spps', $data);
             return TRUE;
@@ -104,7 +112,11 @@ class spp_model extends CI_Model {
     public function delete($id) {
         $query = $this->db->get_where("spps", array('id' => trim($id)));
         if ($query->num_rows() > 0) {
-            $this->db->delete('spps', array('id' => $id));
+        	
+        	// save log data
+        	$this->save_log($query->row_array(), trim($id),"DELETE");
+        	
+            $this->db->delete('spps', array('id' => trim($id)));
             return TRUE;
         } else {
             return FALSE;
@@ -113,6 +125,13 @@ class spp_model extends CI_Model {
 
     public function deletes($ids) {
         if (!empty($ids)) {
+        	// save logs
+        	$query = $this->db->query("SELECT * FROM spps WHERE id IN (" . implode(',', $ids) . ");");
+        	foreach ($query->result_array() as $value) {
+        		// save log data
+        		$this->save_log($value, trim($id),"DELETE");
+        	}
+        	
             $this->db->query("DELETE FROM spps WHERE id IN (".implode(',',$ids).");");
             return $this->db->affected_rows();
         }else{
@@ -129,6 +148,18 @@ class spp_model extends CI_Model {
                     spps.lunas AS lunas, spps.bayar AS bayar, spps.biaya AS biaya,
                     spps.user_id AS user_id, spps.tanggal_bayar AS tanggal_bayar')->
                 join('siswas', 'siswas.id = spps.siswa_id', 'left');
+    }
+    
+    private function save_log($data,$spp_id,$log_info){
+    	$data_log = $data;
+    	if($log_info == "DELETE" || $log_info == "UPDATE"){
+    		$data_log['id'] = NULL;
+    	}
+    	$data_log['log_info'] = $log_info;
+    	$data_log['ip_address'] = $_SERVER['REMOTE_ADDR'];
+    	$data_log['spp_id'] = $spp_id;
+    	$data_log['mod_time'] = date('Y-m-d H:i:s');
+    	$this->db->insert('log_spps', $data_log);
     }
 
 }

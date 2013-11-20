@@ -232,6 +232,9 @@ class spps extends MY_application_controller {
         $bayar = trim($this->input->post('bayar', TRUE));
         $biaya = trim($this->input->post('biaya', TRUE));
         $tanggal_bayar = trim($this->input->post('tanggal_bayar', TRUE));
+        
+        // user yg input
+        $user_id = $this->flexi_auth->get_user_id();
 
         if ($this->form_validation->run()) {
             $data = array(
@@ -240,7 +243,10 @@ class spps extends MY_application_controller {
                 'tahun_tempo' => $tahun_tempo,
                 'bayar' => $bayar,
                 'biaya' => $biaya,
-                'tanggal_bayar' => $tanggal_bayar
+                'tanggal_bayar' => $tanggal_bayar,
+            		
+            	// user_id
+            	'user_id' => $user_id
             );
 
             if ($this->spp_model->update($id, $data)) {
