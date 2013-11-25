@@ -63,6 +63,11 @@
                 <a href="<?php echo site_url("siswanilais"); ?>">Nilai</a>
             </li>
         <?php } ?>
+        <?php if (is_privilege('INDEX_NILAI_AKHIR')) { ?>
+            <li id="sidebar-nilai" class="">
+                <a href="<?php echo site_url("siswanilaiakhirs"); ?>">Nilai Akhir</a>
+            </li>
+        <?php } ?>
         <?php if (is_privilege('INDEX_PERSEN_MP')) { ?>
             <li id="sidebar-persen_mp" class="">
                 <a href="<?php echo site_url("matapelajaranpersentases"); ?>">Persentase Nilai</a>
