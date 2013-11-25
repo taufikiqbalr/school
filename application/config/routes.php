@@ -295,6 +295,8 @@ $route['api/gurus/(:num)'] = 'api/gurus/show/$1';
 $route['api/gurus'] = 'api/gurus/index';
 $route['api/siswas/(:num)'] = 'api/siswas/show/$1';
 $route['api/siswas'] = 'api/siswas/index';
+$route['api/siswanilais/(:num)'] = 'api/siswa_nilais/show/$1';
+$route['api/siswanilais'] = 'api/siswa_nilais/index';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
