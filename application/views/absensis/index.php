@@ -26,11 +26,99 @@
 
                     <input type="submit" value="upload" />
 
-                    <a href="<?php echo base_url('upload/template_absensi.xls') ?>">Template Absensi</a>
+                    <a href="#download-absensi" role="button" class="btn" data-toggle="modal">Download Template Absensi</a>
 
                     </form>
+ 
+					<!-- Modal -->
+					<div id="download-absensi" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="download-absensiLabel" aria-hidden="true">
+					  <div class="modal-header">
+					    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					    <h3 id="myModalLabel">Download Template Absensi</h3>
+					  </div>
+					  <div class="modal-body">
+					    <?php echo form_open('absensis/download', array('class' => 'form-horizontal', 'id' => 'download-absensi-form')) ?>
+					    	<div class="control-group">
+							    <label class="control-label" for="tanggal">Tanggal</label>
+							    <div class="controls">
+							        <div id="dp-download-absensi-tanggal" class="input-append date" data-date-format="dd-mm-yyyy" data-date="<?php echo date('d-m-Y') ?>">
+							            <input class="span2" type="text" readonly="" value="" name="tanggal">
+							            <span class="add-on">
+							                <i class="icon-calendar"></i>
+							            </span>
+							        </div>
+							    </div>
+							</div>
+							<div class="control-group">
+							    <label class="control-label" for="jam">Jam</label>
+							    <div class="controls">
+							    	<div id="download-absensi-jam_awal" class="input-append">
+										<input name="jam_awal" data-format="hh:mm" type="text" class="input-small" readonly=""></input>
+									    <span class="add-on">
+									    	<i data-time-icon="icon-time" data-date-icon="icon-calendar">
+									      	</i>
+									    </span>
+									</div>
+									<label>-</label>
+									<div id="download-absensi-jam_akhir" class="input-append">
+										<input name="jam_akhir" data-format="hh:mm" type="text" class="input-small" readonly=""></input>
+									    <span class="add-on">
+									    	<i data-time-icon="icon-time" data-date-icon="icon-calendar">
+									      	</i>
+									    </span>
+									</div>
+							    </div>
+							</div>
+							<div class="control-group">
+							    <label class="control-label" for="mata_pelajaran">Mata Pelajaran</label>
+							    <div class="controls">
+							        <select class="span2" name="mata_pelajaran">
+							            <?php if (!empty($mata_pelajarans)) { ?>
+							                <?php foreach ($mata_pelajarans as $mata_pelajaran): ?>
+							                    <option value="<?php echo get_full_mata_pelajaran($mata_pelajaran['id'],TRUE) ?>"><?php echo get_full_mata_pelajaran($mata_pelajaran['id'],TRUE) ?></option>
+							                <?php endforeach; ?>
+							            <?php }else { ?>
+							                    <option value=""> </option>
+							            <?php } ?>
+							        </select>
+							    </div>
+							</div>
+							<div class="control-group">
+							    <label class="control-label" for="guru">Guru</label>
+							    <div class="controls">
+							        <select class="span2" name="guru">
+							            <?php if (!empty($gurus)) { ?>
+							                <?php foreach ($gurus as $guru): ?>
+							                    <option value="<?php echo get_full_guru($guru['id'],TRUE) ?>"><?php echo get_full_guru($guru['id'],TRUE) ?></option>
+							                <?php endforeach; ?>
+							            <?php }else { ?>
+							                    <option value=""> </option>
+							            <?php } ?>
+							        </select>
+							    </div>
+							</div>
+							<div class="control-group">
+							    <label class="control-label" for="kelas_bagian_id">Kelas</label>
+							    <div class="controls">
+							        <select class="span2" name="kelas_bagian_id">
+							            <?php if (!empty($kelas_bagians)) { ?>
+							                <?php foreach ($kelas_bagians as $kelas_bagian): ?>
+							                    <option value="<?php echo $kelas_bagian['id'] ?>"><?php echo get_full_kelas($kelas_bagian['id'],TRUE) ?></option>
+							                <?php endforeach; ?>
+							            <?php }else { ?>
+							                    <option value=""> </option>
+							            <?php } ?>
+							        </select>
+							    </div>
+							</div>
+					    </form>
+					  </div>
+					  <div class="modal-footer">
+					    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+					    <button id="download-absensi-submit" class="btn btn-primary">Download</button>
+					  </div>
+					</div>
                 <?php } ?>
-            <!--<a href="<?php echo base_url('absensis/download') ?>">Download Absensi</a>-->
 
                 <form class="form-inline" accept-charset="utf-8" method="get" action="<?php echo site_url('absensis') ?>">
                     <input type="text" class="input-large" placeholder="Search..." name="cond" value="<?php echo $cond ?>"/>

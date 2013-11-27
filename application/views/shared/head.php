@@ -11,5 +11,6 @@
         <link rel="stylesheet" href="<?php echo $includes_dir; ?>css/base.css">
         <link rel="stylesheet" href="<?php echo $includes_dir; ?>css/datepicker.css">
         <link rel="stylesheet" href="<?php echo $includes_dir; ?>css/smart_wizard.css">
+        <link rel="stylesheet" href="<?php echo $includes_dir; ?>css/bootstrap-datetimepicker.min.css">
         <title><?php echo $title ?></title>
     </head>

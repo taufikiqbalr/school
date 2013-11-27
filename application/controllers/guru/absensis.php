@@ -19,6 +19,7 @@ class absensis extends MY_application_controller {
         $this->load->model('tahun_ajaran_model');
         $this->load->model('kelas_bagian_model');
         $this->load->model('siswa_model');
+        $this->load->model('guru_wali_model');
         // is_matpel = 1
         $this->load->model('guru_model');
         $this->load->model('mata_pelajaran_model');
@@ -27,56 +28,69 @@ class absensis extends MY_application_controller {
     }
     
     public function download(){
-        $date = new DateTime();
-        $file_name = $this->flexi_auth->get_user_id() + "" . +$date->getTimestamp();
-
-        $config['upload_path'] = './upload/';
-        $config['allowed_types'] = 'xls';
-        $config['max_size'] = '5000';
-        // change file name
-        $config['file_name'] = $file_name;
-
-        // load library
-        $this->load->library('upload', $config);
-        $this->load->library('excel_reader');
-        
-        $this->excel_reader->getProperties()->setTitle("export")->setDescription("none");
- 
-        $this->excel_reader->setActiveSheetIndex(0);
- 
-        // Field names in the first row
-        $fields = $this->absensi_model->column_names();
-        $col = 0;
-        foreach ($fields as $field)
-        {
-            $this->excel_reader->getActiveSheet()->setCellValueByColumnAndRow($col, 1, $field);
-            $col++;
-        }
- 
-        // Fetching the table data
-        $row = 2;
-        foreach($query->result() as $data)
-        {
-            $col = 0;
-            foreach ($fields as $field)
-            {
-                $this->excel_reader->getActiveSheet()->setCellValueByColumnAndRow($col, $row, $data->$field);
-                $col++;
-            }
- 
-            $row++;
-        }
- 
-        $this->excel_reader->setActiveSheetIndex(0);
- 
-        $objWriter = IOFactory::createWriter($this->excel_reader, 'Excel5');
- 
-        // Sending headers to force the user to download the file
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="Products_'.date('dMy').'.xls"');
-        header('Cache-Control: max-age=0');
- 
-        $objWriter->save('php://output');
+    	$this->load->library('excel');
+    	$sheet = new PHPExcel();
+    	$sheet->getProperties()->setTitle('Data Absensi')->setDescription('Data Absensi');
+    	$sheet->setActiveSheetIndex(0);
+    	
+    	// get day
+    	$day = "";$date=12;$month=12;$year=2012;
+    	if($this->input->post('tanggal', TRUE)){
+    		list($date, $month, $year) = explode('-', $this->input->post('tanggal', TRUE));
+			$eng_day = strftime( "%A", strtotime($month."/".$date."/".$year));
+			$day = convert_day($eng_day);
+    	}
+    	
+    	// get guru wali
+    	$guru = $this->guru_wali_model->get_guru_wali_kelas($this->tahun_ajaran_model->get_id($year),$this->input->post('kelas_bagian_id', TRUE));
+    	$nama_guru = "";
+    	if(!empty($guru))
+    		$nama_guru = $guru['nama'];
+    	
+    	// get kelas
+    	$kelas = get_full_kelas($this->input->post('kelas_bagian_id', TRUE),TRUE);
+    	
+    	// col, row, value
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(0, 1, 'Hari, Tanggal');
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(1, 1, $day.", ".$this->input->post('tanggal', TRUE));
+    	
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(0, 2, 'Jam');
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(1, 2, $this->input->post('jam_awal', TRUE)." - ".$this->input->post('jam_akhir', TRUE));
+    	
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(0, 3, 'Mata Pelajaran');
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(1, 3, $this->input->post('mata_pelajaran', TRUE));
+    	
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(0, 4, 'Guru');
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(1, 4, $this->input->post('guru', TRUE));
+    	
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(0, 5, 'Kelas');
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(1, 5, $kelas);
+    	
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(0, 6, 'Guru Wali');
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(1, 6, $nama_guru);
+    	
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(0, 8, 'NIS');
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(1, 8, 'Nama');
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(2, 8, 'Kehadiran');
+    	$sheet->getActiveSheet()->setCellValueByColumnAndRow(3, 8, 'Keterangan');
+    	
+    	// fetch siswa where kelas_bagian_id, tahun_ajaran_id
+    	$siswas = $this->siswa_model->get_siswas_with_kelas($this->input->post('kelas_bagian_id', TRUE), $this->tahun_ajaran_model->get_id($year));
+    	$row = 9;
+    	foreach ($siswas as $siswa) {
+    		$sheet->getActiveSheet()->setCellValueByColumnAndRow(0, $row, $siswa['nis']);
+    		$sheet->getActiveSheet()->setCellValueByColumnAndRow(1, $row, $siswa['nama']);
+    		$row++;
+    	}
+    	
+    	$sheet_writer = PHPExcel_IOFactory::createWriter($sheet, 'Excel5');
+    	header('Content-Type: application/vnd.ms-excel');
+    	
+    	// Data Absensi Kelas - Tanggal
+    	header('Content-Disposition: attachment;filename="Data Absensi_'.$kelas.'_'.strftime( "%d%b%Y", strtotime($month."/".$date."/".$year)).'.xls"');
+    	
+    	header('Cache-Control: max-age=0');
+    	$sheet_writer->save('php://output');
     }
 
     public function upload() {

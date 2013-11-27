@@ -80,7 +80,19 @@ class guru_wali_model extends CI_Model {
         $this->db->where('tahun_ajaran_id', $tahun_ajaran_id);
         $this->db->where('kelas_bagian_id', $kelas_bagian_id);
         return $this->db->get('guru_walis');
-    }    
+    }
+    
+    public function get_guru_wali_kelas($tahun_ajaran_id, $kelas_bagian_id) {
+    	if(empty($tahun_ajaran_id)) $tahun_ajaran_id = 0;
+    	if(empty($kelas_bagian_id)) $kelas_bagian_id = 0;
+    	$query = $this->db->query("SELECT guru_id FROM guru_walis WHERE tahun_ajaran_id = ".$tahun_ajaran_id." AND kelas_bagian_id =".$kelas_bagian_id);
+    	$result = $query->row_array();
+    	$guru_id = 0;
+    	if ($query->num_rows() > 0)
+    		$guru_id = ((int) $result['guru_id']);
+    	$query = $this->db->query("SELECT * FROM gurus WHERE id = ".$guru_id);
+    	return $query->row_array();
+    }
     
 
 }

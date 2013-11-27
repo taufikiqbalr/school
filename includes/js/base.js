@@ -341,6 +341,21 @@ $(document).ready(function() {
     $('#jurusan_idx_del').on('click', function() {
         $("#tb_jurusan_idx_frm").submit();
     });
+    
+    // download template absensi
+    $('#download-absensi-submit').on('click', function() {
+        $("#download-absensi-form").submit();
+    });
+    
+    $('#download-absensi-jam_awal').datetimepicker({
+    	pickDate: false,
+    	pickSeconds: false
+	});
+    
+    $('#download-absensi-jam_akhir').datetimepicker({
+    	pickDate: false,
+    	pickSeconds: false
+	});
 
     // date picker
     $('.date').datepicker();
@@ -352,6 +367,13 @@ $(document).ready(function() {
 //    $('#dp-siswa-edit-tgl_lhr').datepicker();
 //    $('#dp-staff-new-tgl_lhr').datepicker();
 //    $('#dp-staff-edit-tgl_lhr').datepicker();
+    
+    // time picker
+    $('.timepicker').datetimepicker({
+    	pickDate: false,
+    	pickSeconds: false
+	});
+    
 
     // jquery numeric
     $(".numeric").numeric();

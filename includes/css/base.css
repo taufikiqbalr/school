@@ -64,3 +64,7 @@ footer {
     margin-left: 21px
 }
 
+/* for modal pop up date picker */
+.datepicker {
+	z-index: 1151 !important;
+}

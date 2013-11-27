@@ -16,6 +16,35 @@ function is_guru_matpel($guru_kelas_bagian_id, $priv, $privs) {
     }
 }
 
+function convert_day($day){
+	switch ($day) {
+        case "Sunday":
+            return 'Minggu';
+            break;
+        case "Monday":
+            return 'Senin';
+            break;
+        case "Tuesday":
+            return 'Selasa';
+            break;
+        case "Wednesday":
+            return 'Rau';
+            break;
+        case "Thursday":
+            return 'Kamis';
+            break;
+        case "Friday":
+            return 'Jumat';
+            break;
+        case "Saturday":
+        	return 'Sabtu';
+        	break;
+        default :
+            return $day;
+            break;
+    }
+}
+
 function months() {
     return array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'Nopember', 'Desember');
 }
@@ -132,26 +161,26 @@ function is_guru($privilege, $privileges = FALSE) {
         return FALSE;
 }
 
-function get_full_kelas($kelas_bagian_id) {
+function get_full_kelas($kelas_bagian_id, $space=FALSE) {
     $kelas_bagian = get_kelas_bagian($kelas_bagian_id);
     $kelas = get_kelas($kelas_bagian['kelas_id']);
     $jurusan = get_jurusan($kelas['jurusan_id']);
     $jurusan_nama = (count($jurusan) > 0) ? $jurusan['nama'] : "";
-    return trim($jurusan_nama . ' ' . $kelas['tingkat'] . '-' . $kelas_bagian['nama']);
+    return $space ? trim($kelas['tingkat'] . ' - ' . $kelas_bagian['nama']) : trim($jurusan_nama . ' ' . $kelas['tingkat'] . '-' . $kelas_bagian['nama']);
 }
 
-function get_full_mata_pelajaran($matpel_id) {
+function get_full_mata_pelajaran($matpel_id, $space=FALSE) {
     $matpel = get_mata_pelajaran($matpel_id);
     if (count($matpel) > 0)
-        return $matpel['kode'] . '-' . $matpel['nama'];
+        return $space ? $matpel['kode'] . ' - ' . $matpel['nama'] : $matpel['kode'] . '-' . $matpel['nama'];
     else
         return '';
 }
 
-function get_full_guru($guru_id) {
+function get_full_guru($guru_id, $space=FALSE) {
     $guru = get_guru($guru_id);
     if (count($guru) > 0)
-        return $guru['nip'] . '-' . $guru['nama'];
+        return $space ? $guru['nip'] . ' - ' . $guru['nama'] : $guru['nip'] . '-' . $guru['nama'];
     else
         return '';
 }

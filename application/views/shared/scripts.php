@@ -3,6 +3,7 @@
 <script src="<?php echo $includes_dir;?>js/bootstrap.min.js"></script>
 <script src="<?php echo $includes_dir;?>js/jquery.smartWizard-2.0.min.js"></script>
 <script src="<?php echo $includes_dir;?>js/bootstrap-datepicker.js"></script>
+<script src="<?php echo $includes_dir;?>js/bootstrap-datetimepicker.min.js"></script>
 <script src="<?php echo $includes_dir;?>js/jquery.numeric.js"></script>
 <script src="<?php echo $includes_dir;?>js/base.js"></script>
 
